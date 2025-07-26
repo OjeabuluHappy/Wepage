@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodak Hotshots - Premium Photography</title>
+    <style>
+        /* FONT IMPORTS */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap');
+
+        /* --- GLOBAL STYLES & DESIGN SYSTEM --- */
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1E1E1E;
+            --accent-primary: #C5A47E;
+            --accent-hover: #B5946E;
+            --text-primary: #EAEAEA;
+            --text-secondary: #A0A0A0;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            font-size: 56px;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        /* --- HEADER --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .main-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--accent-primary);
+        }
+        
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1964&auto=format&fit=crop') no-repeat center center/cover;
+            filter: grayscale(100%);
+            z-index: -2;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 1));
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: 120px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-section .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 450px;
+            background-color: #333;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 30px;
+        }
+
+        .about-content h2 {
+            font-size: 56px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .about-content p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .about-features {
+            list-style: none;
+        }
+
+        .about-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .about-features li svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            color: var(--accent-primary);
+        }
+        
+        /* --- SERVICES SECTION --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--bg-secondary);
+            border-radius: 16px;
+            text-align: center;
+            padding-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ccc;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            line-height: 1.2;
+            padding: 0 10px;
+        }
+        
+        /* --- FEATURED WORK SECTION --- */
+        .featured-work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 250px;
+            grid-auto-flow: dense;
+            gap: 20px;
+        }
+
+        .work-item {
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .work-item.image {
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .work-item.testimonial {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .work-item.testimonial .author {
+            font-style: normal;
+            margin-top: 15px;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .work-item.h-2 { grid-row: span 2; }
+        .work-item.w-2 { grid-column: span 2; }
+
+        /* --- PARTNERS SECTION --- */
+        .partners-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .partner-item {
+            text-align: center;
+        }
+
+        .partner-item .image-placeholder {
+            width: 150px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .partner-item:hover .image-placeholder {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .partner-item p {
+            color: var(--text-secondary);
+            font-family: 'Inter';
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .partner-item:hover p {
+            color: var(--accent-primary);
+        }
+
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: var(--bg-primary);
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col p, .footer-col a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .social-links a {
+            margin-right: 15px;
+            color: var(--text-secondary);
+            font-size: 22px;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 992px) {
+            .main-header { padding: 15px 20px; }
+            .main-nav { display: none; /* Add JS for hamburger menu */ }
+            .about-section .container { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-links { margin-top: 20px; }
+            .about-content h2 { text-align: center; }
+        }
+
+        @media (max-width: 576px) {
+            .section-heading { font-size: 40px; }
+            .hero-content h1 { font-size: 60px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .featured-work-grid { grid-auto-rows: 200px; }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Using Font Awesome for icons -->
+</head>
+<body>
+
+    <!-- ======================= HEADER ======================= -->
+    <header class="main-header">
+        <!-- YOUR LOGO HERE: Replace 'KODAK HOTSHOTS' with your image logo if you have one -->
+        <a href="#" class="logo">KODAK HOTSHOTS</a>
+        <nav class="main-nav">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ======================= HERO SECTION ======================= -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Capture The Moment</h1>
+                <p>Premium photography for unforgettable memories and professional needs.</p>
+                <!-- BOOKING LINK: Replace '#' with your booking link (e.g., Calendly, Google Form) -->
+                <a href="#" class="cta-button">Book A Session</a>
+            </div>
+        </section>
+
+        <!-- ======================= ABOUT SECTION ======================= -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-image-placeholder">
+                    <!-- IMAGE PLACEHOLDER: About Us Image -->
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3ZM3 19V5H21V19H3Z" fill="currentColor"/><path d="M7.5 12C8.88071 12 10 10.8807 10 9.5C10 8.11929 8.88071 7 7.5 7C6.11929 7 5 8.11929 5 9.5C5 10.8807 6.11929 12 7.5 12Z" fill="currentColor"/><path d="M21 15.2361L18.9497 13.1858C18.5523 12.7884 17.913 12.7884 17.5156 13.1858L12 18.7014L9.5 16.2014L3 22.7014H21V15.2361Z" fill="currentColor"/></svg>
+                </div>
+                <div class="about-content">
+                    <h2>The Art Of Vision</h2>
+                    <p>At Kodak Hotshots, we blend technical mastery with artistic vision. We are a collective of elite photographers dedicated to producing cinematic, high-impact imagery that tells your story with unparalleled quality and style.</p>
+                    <ul class="about-features">
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 11.59L5.41 11 4 12.41l3 3L16 6.41 14.59 5 8 11.59z"></path></svg>State-of-the-Art Equipment</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 11.59L5.41 11 4 12.41l3 3L16 6.41 14.59 5 8 11.59z"></path></svg>Masters of Light and Composition</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 11.59L5.41 11 4 12.41l3 3L16 6.41 14.59 5 8 11.59z"></path></svg>Bespoke Client Experience</li>
+                        <li><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 11.59L5.41 11 4 12.41l3 3L16 6.41 14.59 5 8 11.59z"></path></svg>Award-Winning Creative Team</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SERVICES SECTION ======================= -->
+        <section class="services-section" id="services">
+            <div class="container">
+                <h2 class="section-heading">Our Signature Services</h2>
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Exclusive Event Coverage --></div>
+                        <h3>Exclusive Event<br>Coverage</h3>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Elite Passport Photography --></div>
+                        <h3>Elite Passport<br>Photography</h3>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Luxe Studio Portraits --></div>
+                        <h3>Luxe Studio<br>Portraits</h3>
+                    </div>
+                    <!-- Service 4 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Premium Framing Creations --></div>
+                        <h3>Premium Framing<br>Creations</h3>
+                    </div>
+                     <!-- Service 5 -->
+                     <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Masterclass Photography Training --></div>
+                        <h3>Masterclass Photography<br>Training</h3>
+                    </div>
+                    <!-- Service 6 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Deluxe Photo Book Binding --></div>
+                        <h3>Deluxe Photo Book<br>Binding</h3>
+                    </div>
+                    <!-- Service 7 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for High-Quality Document Printing --></div>
+                        <h3>High-Quality Document<br>Printing</h3>
+                    </div>
+                    <!-- Service 8 -->
+                    <div class="service-card">
+                        <div class="image-placeholder"><!-- IMAGE for Professional Photocopy Services --></div>
+                        <h3>Professional Photocopy<br>Services</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ======================= FEATURED WORK SECTION ======================= -->
+        <section class="featured-work-section" id="work">
+            <div class="container">
+                <h2 class="section-heading">Featured Work</h2>
+                <div class="featured-work-grid">
+                    <!-- You can customize the layout by changing the classes h-2 (height 2) and w-2 (width 2) -->
+                    <div class="work-item image h-2" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd51725?q=80&w=1887&auto=format&fit=crop')"><!-- GALLERY IMAGE 1 --></div>
+                    <div class="work-item image" style="background-image: url('https://images.unsplash.com/photo-1618886614638-80e3c15c4b42?q=80&w=1887&auto=format&fit=crop')"><!-- GALLERY IMAGE 2 --></div>
+                    <div class="work-item image" style="background-image: url('https://images.unsplash.com/photo-1542042161-d702627043e2?q=80&w=1887&auto=format&fit=crop')"><!-- GALLERY IMAGE 3 --></div>
+                    <div class="work-item testimonial">
+                        <p>"The results were beyond professional; they were art. Kodak Hotshots captured the soul of our event."</p>
+                        <p class="author">— Elite Client</p>
+                    </div>
+                    <div class="work-item image" style="background-image: url('https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=1887&auto=format&fit=crop')"><!-- GALLERY IMAGE 4 --></div>
+                    <div class="work-item image h-2" style="background-image: url('https://images.unsplash.com/photo-1521405617584-1d986719b212?q=80&w=1887&auto=format&fit=crop')"><!-- GALLERY IMAGE 5 --></div>
+                    <div class="work-item testimonial">
+                        <p>"Unmatched creativity and technical excellence. Every shot tells a story."</p>
+                        <p class="author">— Creative Director</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= PARTNERS SECTION ======================= -->
+        <section class="partners-section">
+            <div class="container">
+                <h2 class="section-heading">Equipment & Partners</h2>
+                <div class="partners-grid">
+                    <div class="partner-item">
+                        <div class="image-placeholder"><!-- PARTNER LOGO 1: Canon --></div>
+                        <p>Canon</p>
+                    </div>
+                    <div class="partner-item">
+                        <div class="image-placeholder"><!-- PARTNER LOGO 2: Sony --></div>
+                        <p>Sony</p>
+                    </div>
+                    <div class="partner-item">
+                        <div class="image-placeholder"><!-- PARTNER LOGO 3: Profoto --></div>
+                        <p>Profoto</p>
+                    </div>
+                    <div class="partner-item">
+                        <div class="image-placeholder"><!-- PARTNER LOGO 4: Hasselblad --></div>
+                        <p>Hasselblad</p>
+                    </div>
+                    <div class="partner-item">
+                        <div class="image-placeholder"><!-- PARTNER LOGO 5: Leica --></div>
+                        <p>Leica</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="main-footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>CONTACT INFO</h3>
+                    <p>WhatsApp: +2348033132953</p>
+                    <p>hello@kodakhotshots.com</p>
+                    <p>14 Idowu Martins Street, 4th Floor<br>Mega Plaza Shopping Mall<br>Victoria Island, Lagos, Nigeria</p>
+                </div>
+                <div class="footer-col">
+                    <h3>BUSINESS HOURS</h3>
+                    <p>Monday - Friday: 9AM - 7PM</p>
+                    <p>Saturday: 10AM - 5PM</p>
+                    <p>Sunday: By Appointment</p>
+                </div>
+                <div class="footer-col">
+                    <h3>FOLLOW US</h3>
+                    <div class="social-links">
+                        <!-- Replace # with your actual social media links -->
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Kodak Hotshots. All rights reserved. Capturing moments, creating art.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
